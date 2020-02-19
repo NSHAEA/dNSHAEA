@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'co.com.jccp.ealgorithms'
+group 'co.com.jccp.dnshaea'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
