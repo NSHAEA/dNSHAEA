@@ -1,7 +1,5 @@
-package co.com.jccp.dnshaea.distributed;
+package co.com.jccp.dnshaea.distributed.cpu;
 
-import co.com.jccp.dnshaea.distributed.GenerateOffspring;
-import co.com.jccp.dnshaea.distributed.Replace;
 import co.com.jccp.dnshaea.function.ObjectiveFunction;
 import co.com.jccp.dnshaea.gop.GeneticOperator;
 import co.com.jccp.dnshaea.individual.MOEAIndividual;
@@ -30,7 +28,7 @@ public class dNSHAEA_CPU<T> {
     private List<GeneticOperator<T>> operators;
     private Selection<T> selection;
 
-    private static final int MAX_THREADS = 2;
+    private static final int MAX_THREADS = 1;
 
     public dNSHAEA_CPU(PopulationInitialization<T> popInit, ObjectiveFunction<T> function, boolean minimize, int dimensions, int popSize, int iterations, List<GeneticOperator<T>> operators, Selection<T> selection) {
         this.popInit = popInit;
