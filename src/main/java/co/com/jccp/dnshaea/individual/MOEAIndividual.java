@@ -1,7 +1,8 @@
 package co.com.jccp.dnshaea.individual;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.List;
 
 public class MOEAIndividual<T> {
 
@@ -48,18 +49,22 @@ public class MOEAIndividual<T> {
         this.objectiveValues = objectiveValues;
     }
 
+    @JsonIgnore
     public List<MOEAIndividual<T>> getDominatedByMe() {
         return dominatedByMe;
     }
 
+    @JsonIgnore
     public void setDominatedByMe(List<MOEAIndividual<T>> dominatedByMe) {
         this.dominatedByMe = dominatedByMe;
     }
 
+    @JsonIgnore
     public int getDominatesMe() {
         return dominatesMe;
     }
 
+    @JsonIgnore
     public void setDominatesMe(int dominatesMe) {
         this.dominatesMe = dominatesMe;
     }
@@ -87,10 +92,12 @@ public class MOEAIndividual<T> {
         return Double.compare(this.getFitness(), o.getFitness());
     }
 
+    @JsonIgnore
     public List<MOEAIndividual<T>> getOffspring() {
         return offspring;
     }
 
+    @JsonIgnore
     public void setOffspring(List<MOEAIndividual<T>> offspring) {
         this.offspring = offspring;
     }

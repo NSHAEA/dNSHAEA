@@ -20,8 +20,8 @@ public class ZDT4 implements ObjectiveFunction<double[]> {
         f2 = g * (1 - Math.sqrt(f1 / g));
 
 
-        long start = System.nanoTime();
-        while(start + 400000 >= System.nanoTime());
+//        long start = System.nanoTime();
+//        while(start + 400000 >= System.nanoTime());
 
         return new double[]{f1, f2};
     }

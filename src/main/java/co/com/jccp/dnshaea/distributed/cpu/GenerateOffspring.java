@@ -1,4 +1,4 @@
-package co.com.jccp.dnshaea.distributed;
+package co.com.jccp.dnshaea.distributed.cpu;
 
 import co.com.jccp.dnshaea.function.ObjectiveFunction;
 import co.com.jccp.dnshaea.gop.GeneticOperator;

@@ -1,5 +1,6 @@
 package co.com.jccp.dnshaea;
 
+import co.com.jccp.dnshaea.distributed.cloud.dNSHAEA_CLOUD;
 import co.com.jccp.dnshaea.distributed.cpu.dNSHAEA_CPU;
 import co.com.jccp.dnshaea.function.*;
 import co.com.jccp.dnshaea.gop.GeneticOperator;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.util.*;
 
 
-public class dNSHAEA_CPU_Test {
+public class dNSHAEA_CLOUD_Test {
 
     @Test
     public void nshaeaTest() throws IOException {
@@ -160,7 +161,7 @@ public class dNSHAEA_CPU_Test {
                 operators.add(pm);
                 TournamentSelection<double[]> selection = new TournamentSelection<>(4);
 
-                dNSHAEA_CPU<double[]> NSHAEA = new dNSHAEA_CPU<>(init, f.getFunction(), minimize, f.getDimensions(), popSize, iterations, operators, selection);
+                dNSHAEA_CLOUD<double[]> NSHAEA = new dNSHAEA_CLOUD<>(init, f.getFunction(), minimize, f.getDimensions(), popSize, iterations, operators, selection);
 
                 List<MOEAIndividual<double[]>> answer = NSHAEA.apply();
 

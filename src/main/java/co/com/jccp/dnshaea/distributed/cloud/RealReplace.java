@@ -1,7 +1,9 @@
-package co.com.jccp.dnshaea.distributed;
+package co.com.jccp.dnshaea.distributed.cloud;
 
 import co.com.jccp.dnshaea.individual.MOEAIndividual;
 import co.com.jccp.dnshaea.utils.RandomUtils;
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import java.util.Comparator;
 import java.util.List;
@@ -9,26 +11,20 @@ import java.util.List;
 /**
  * Created by: Juan Camilo Castro Pinto
  **/
-public class Replace<T> implements Runnable {
+public class RealReplace implements RequestHandler<CloudIndividual<double[]>, MOEAIndividual<double[]>> {
 
-    List<MOEAIndividual<T>> pop;
-    MOEAIndividual<T> ind;
-    Comparator<MOEAIndividual<T>> comp;
-    MOEAIndividual<T> best;
-
-    public Replace(List<MOEAIndividual<T>> pop, MOEAIndividual<T> ind, Comparator<MOEAIndividual<T>> comp)
-    {
-        this.pop = pop;
-        this.ind = ind;
-        this.best = ind;
-        this.comp = comp;
-    }
-
+    private static final Comparator<MOEAIndividual<double[]>> comp = (o1, o2) -> {
+        int result = o1.compareByRank(o2);
+        if (result == 0)
+            return o2.compareByDiversity(o1);
+        return result;
+    };
 
     @Override
-    public void run() {
-
-        for (MOEAIndividual<T> off : ind.getOffspring()) {
+    public MOEAIndividual<double[]> handleRequest(CloudIndividual<double[]> input, Context context) {
+        MOEAIndividual<double[]> ind = input.getIndividual();
+        MOEAIndividual<double[]> best = input.getIndividual();
+        for (MOEAIndividual<double[]> off : input.getPop()) {
             if(comp.compare(off, best) <= 0) {
                 best = off;
             }
@@ -46,8 +42,8 @@ public class Replace<T> implements Runnable {
                 modifyProbabilities(1, ind.getOpProbabilities(), ind.getSelectedOp());
         }
         best.setOpProbabilities(ind.getOpProbabilities());
+        return best;
     }
-
 
     private void modifyProbabilities(int sign, double[] prob, int selectedOGIndex)
     {
@@ -64,7 +60,5 @@ public class Replace<T> implements Runnable {
         }
     }
 
-    public MOEAIndividual<T> getBest() {
-        return best;
-    }
+
 }
